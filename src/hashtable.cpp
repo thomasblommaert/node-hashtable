@@ -194,13 +194,13 @@ NAN_METHOD(HashTable::Clear) {
     HashTable *obj = Nan::ObjectWrap::Unwrap<HashTable>(info.This());
 
     for(MapType::const_iterator itr = obj->map.begin(); itr != obj->map.end(); ) {
+        itr = obj->map.erase(itr);
+        
         itr->first->Reset();
         itr->second->Reset();
 
         delete itr->first;
         delete itr->second;
-
-        itr = obj->map.erase(itr);
     }
 
     info.GetReturnValue().Set(Nan::Undefined());
