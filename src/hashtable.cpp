@@ -175,14 +175,14 @@ NAN_METHOD(HashTable::Remove) {
         info.GetReturnValue().Set(Nan::False());
         return;
     }
-
+    
+    obj->map.erase(itr);
+    
     itr->first->Reset();
     itr->second->Reset();
 
     delete itr->first;
     delete itr->second;
-
-    obj->map.erase(itr);
 
     info.GetReturnValue().Set(Nan::True());
     return;
